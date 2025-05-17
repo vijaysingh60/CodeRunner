@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_URL = "https://coderunner-g0n7.onrender.com/";
+const API_URL = "https://coderunner-g0n7.onrender.com";
 
 export async function runCode(code) {
     try {
