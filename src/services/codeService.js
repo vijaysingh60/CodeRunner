@@ -1,9 +1,7 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
 
-dotenv.config();
 
-const API_URL = process.env.BACKEND_URL;
+const API_URL = "https://coderunner-g0n7.onrender.com/";
 
 export async function runCode(code) {
     try {
