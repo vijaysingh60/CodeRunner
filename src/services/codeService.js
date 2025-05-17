@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+require("dotenv").config()
 const API_URL = process.env.BACKEND_URL;
 
 export async function runCode(code) {
