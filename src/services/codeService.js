@@ -1,5 +1,7 @@
 import axios from 'axios';
-require("dotenv").config()
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const API_URL = process.env.BACKEND_URL;
 
