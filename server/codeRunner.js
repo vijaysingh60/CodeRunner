@@ -43,46 +43,46 @@ export async function execCode(code) {
   }
 }
 
-// function executeFile(filepath) {
-//   return new Promise((resolve, reject) => {
-//     // Set a timeout of 5 seconds
-//     const timeout = 5000;
-    
-//     // In a production environment, this would use Docker for isolation
-//     // For this demo, we're using Node directly with timeout
-//     const process = exec(`node "${filepath}"`, { timeout }, (error, stdout, stderr) => {
-//       if (error) {
-//         // If this is a timeout error
-//         if (error.signal === 'SIGTERM') {
-//           reject(new Error('Execution timed out (5 seconds)'));
-//         } else {
-//           reject(new Error(stderr || error.message));
-//         }
-//         return;
-//       }
-      
-//       // Return combined output
-//       resolve(stdout + (stderr ? `\nErrors:\n${stderr}` : ''));
-//     });
-//   });
-// }
 function executeFile(filepath) {
-    return new Promise((resolve, reject) => {
-      const dockerCommand = `docker run --rm -v "${filepath}:/code.js:ro" node:20-alpine node /code.js`;
-  
-      exec(dockerCommand, { timeout: 50000 }, (error, stdout, stderr) => {
-        if (error) {
-         
-          if (error.signal === 'SIGTERM') {
-            reject(new Error('Execution timed out (5 seconds)'));
-          } else {
-            reject(new Error(stderr || error.message));
-          }
-          return;
+  return new Promise((resolve, reject) => {
+    // Set a timeout of 5 seconds
+    const timeout = 5000;
+    
+    // In a production environment, this would use Docker for isolation
+    // For this demo, we're using Node directly with timeout
+    const process = exec(`node "${filepath}"`, { timeout }, (error, stdout, stderr) => {
+      if (error) {
+        // If this is a timeout error
+        if (error.signal === 'SIGTERM') {
+          reject(new Error('Execution timed out (5 seconds)'));
+        } else {
+          reject(new Error(stderr || error.message));
         }
-  
-        resolve(stdout + (stderr ? `\nErrors:\n${stderr}` : ''));
-      });
+        return;
+      }
+      
+      // Return combined output
+      resolve(stdout + (stderr ? `\nErrors:\n${stderr}` : ''));
     });
-  }
+  });
+}
+// function executeFile(filepath) {
+//     return new Promise((resolve, reject) => {
+//       const dockerCommand = `docker run --rm -v "${filepath}:/code.js:ro" node:20-alpine node /code.js`;
+  
+//       exec(dockerCommand, { timeout: 50000 }, (error, stdout, stderr) => {
+//         if (error) {
+         
+//           if (error.signal === 'SIGTERM') {
+//             reject(new Error('Execution timed out (5 seconds)'));
+//           } else {
+//             reject(new Error(stderr || error.message));
+//           }
+//           return;
+//         }
+  
+//         resolve(stdout + (stderr ? `\nErrors:\n${stderr}` : ''));
+//       });
+//     });
+//   }
   
